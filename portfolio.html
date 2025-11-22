@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Ali Zayan - Software Engineer & Biomedical Systems Innovator. Specializing in Autonomous Systems, Medical Imaging, and Full-Stack Development.">
+    <title>Ali Zayan | Software Engineer & Biomedical Innovator</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        navy: {
+                            900: '#0a192f',
+                            800: '#112240',
+                            700: '#233554',
+                        },
+                        teal: {
+                            300: '#64ffda',
+                            400: '#26d9ac',
+                        },
+                        slate: {
+                            light: '#8892b0',
+                            lighter: '#a8b2d1',
+                            white: '#e6f1ff',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a192f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #233554;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64ffda;
+        }
+
+        /* Utility for revealing elements on scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(to right, #64ffda, #3b82f6);
+        }
+    </style>
+</head>
+<body class="bg-navy-900 text-slate-light font-sans antialiased selection:bg-teal-300 selection:text-navy-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-navy-900/90 backdrop-blur-md border-b border-navy-700 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-teal-300 font-mono text-xl font-bold border-2 border-teal-300 rounded p-2 hover:bg-teal-300/10 transition">
+                        AZ.
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="hover:text-teal-300 transition-colors font-mono text-sm"><span class="text-teal-300">01.</span> About</a>
+                        <a href="#experience" class="hover:text-teal-300 transition-colors font-mono text-sm"><span class="text-teal-300">02.</span> Experience</a>
+                        <a href="#projects" class="hover:text-teal-300 transition-colors font-mono text-sm"><span class="text-teal-300">03.</span> Projects</a>
+                        <a href="#contact" class="hover:text-teal-300 transition-colors font-mono text-sm"><span class="text-teal-300">04.</span> Contact</a>
+                        <a href="https://drive.google.com/file/d/1xLI0rjjAb2nRdCPnTDOsOXO8S8D1pWEO/view?usp=drive_link" target="_blank" class="px-4 py-2 text-sm font-mono text-teal-300 border border-teal-300 rounded hover:bg-teal-300/10 transition">Resume</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-white hover:text-teal-300 focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-navy-800 absolute w-full border-b border-navy-700 shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:text-teal-300 hover:bg-navy-700"><span class="text-teal-300">01.</span> About</a>
+                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium hover:text-teal-300 hover:bg-navy-700"><span class="text-teal-300">02.</span> Experience</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:text-teal-300 hover:bg-navy-700"><span class="text-teal-300">03.</span> Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:text-teal-300 hover:bg-navy-700"><span class="text-teal-300">04.</span> Contact</a>
+                <a href="https://drive.google.com/file/d/1xLI0rjjAb2nRdCPnTDOsOXO8S8D1pWEO/view?usp=drive_link" target="_blank" class="block px-3 py-2 rounded-md text-base font-medium text-teal-300 border border-teal-300 text-center mt-4">Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col justify-center items-start reveal active">
+            <p class="text-teal-300 font-mono mb-5 ml-1">Hi, my name is</p>
+            <h1 class="text-5xl md:text-7xl font-bold text-slate-white mb-4 tracking-tight">
+                Ali Zayan.
+            </h1>
+            <h2 class="text-4xl md:text-6xl font-bold text-slate-light mb-8">
+                I build intelligent systems for the future.
+            </h2>
+            <p class="max-w-xl text-lg mb-12 leading-relaxed">
+                I'm a Systems and Biomedical Engineer based in Cairo, specializing in 
+                <span class="text-teal-300">autonomous systems</span>, 
+                <span class="text-teal-300">medical imaging AI</span>, and 
+                <span class="text-teal-300">full-stack development</span>. 
+                I bridge the gap between complex algorithms and human-centric engineering.
+            </p>
+            <div class="flex gap-4">
+                <a href="#projects" class="px-8 py-4 border border-teal-300 text-teal-300 font-mono rounded hover:bg-teal-300/10 transition duration-300">
+                    Check out my work
+                </a>
+                <a href="#contact" class="px-8 py-4 bg-teal-300 text-navy-900 font-mono rounded hover:bg-teal-400 transition duration-300 font-bold">
+                    Get In Touch
+                </a>
+            </div>
+            
+            <!-- Decorative Blobs -->
+            <div class="absolute top-1/4 right-0 -z-10 opacity-20 blur-3xl pointer-events-none overflow-hidden w-full h-full">
+                <div class="absolute top-0 right-0 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+                <div class="absolute top-0 right-20 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 reveal">
+            <div class="flex items-center mb-12">
+                <span class="text-2xl md:text-3xl font-bold text-slate-white font-mono mr-4"><span class="text-teal-300">01.</span> About Me</span>
+                <div class="h-px bg-navy-700 flex-grow max-w-xs"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="md:col-span-2 space-y-4 text-lg">
+                    <p>
+                        Hello! I am a student at <span class="text-teal-300">Cairo University</span> studying Systems and Biomedical Engineering. My passion lies in solving real-world problems through efficient code and innovative algorithms.
+                    </p>
+                    <p>
+                        My journey has taken me from developing <span class="text-teal-300">autonomous vehicle navigation</span> systems that placed <span class="text-teal-300 font-bold">3rd globally</span>, to architecting <span class="text-teal-300">AI-powered medical imaging</span> platforms that accelerate MRI scans.
+                    </p>
+                    <p>
+                        Whether I'm optimizing 3D visualizations or building educational tools for the visually impaired, I am driven by technical excellence and social impact.
+                    </p>
+                    
+                    <p class="pt-4 mb-2">Here are a few technologies I've been working with recently:</p>
+                    <ul class="grid grid-cols-2 gap-2 font-mono text-sm">
+                        <li class="flex items-center"><i class="fas fa-caret-right text-teal-300 mr-2"></i> C / C++</li>
+                        <li class="flex items-center"><i class="fas fa-caret-right text-teal-300 mr-2"></i> Python (PyTorch)</li>
+                        <li class="flex items-center"><i class="fas fa-caret-right text-teal-300 mr-2"></i> JavaScript (ES6+)</li>
+                        <li class="flex items-center"><i class="fas fa-caret-right text-teal-300 mr-2"></i> ROS 1 (Noetic)</li>
+                        <li class="flex items-center"><i class="fas fa-caret-right text-teal-300 mr-2"></i> React & Flask</li>
+                        <li class="flex items-center"><i class="fas fa-caret-right text-teal-300 mr-2"></i> Qt & Java Swing</li>
+                    </ul>
+                </div>
+
+                <!-- Skill Cubes / Visual -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-teal-300 to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-navy-800 p-6 rounded-lg border border-navy-700 h-full flex flex-col justify-center items-center text-center">
+                        <i class="fas fa-laptop-code text-6xl text-teal-300 mb-6"></i>
+                        <h3 class="text-slate-white font-bold text-xl mb-2">Engineering Mindset</h3>
+                        <p class="text-sm">Merging biomedical domain knowledge with rigorous software engineering practices.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 reveal">
+            <div class="flex items-center mb-12">
+                <span class="text-2xl md:text-3xl font-bold text-slate-white font-mono mr-4"><span class="text-teal-300">02.</span> Where I've Worked</span>
+                <div class="h-px bg-navy-700 flex-grow max-w-xs"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Tab List -->
+                <div class="flex md:flex-col overflow-x-auto md:overflow-visible border-b md:border-b-0 md:border-l border-navy-700 w-full md:w-48" role="tablist">
+                    <button class="tab-btn active px-5 py-3 text-left font-mono text-sm text-teal-300 border-b-2 md:border-b-0 md:border-l-2 border-teal-300 bg-navy-800/50 whitespace-nowrap" onclick="openTab(event, 'astute')">Astute Imaging</button>
+                    <button class="tab-btn px-5 py-3 text-left font-mono text-sm text-slate-light hover:bg-navy-800 hover:text-teal-300 border-b-2 md:border-b-0 md:border-l-2 border-transparent transition-all whitespace-nowrap" onclick="openTab(event, 'shell')">Eco Racing Team</button>
+                    <button class="tab-btn px-5 py-3 text-left font-mono text-sm text-slate-light hover:bg-navy-800 hover:text-teal-300 border-b-2 md:border-b-0 md:border-l-2 border-transparent transition-all whitespace-nowrap" onclick="openTab(event, 'rehab')">Rehab Lab</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="flex-1 min-h-[300px]">
+                    
+                    <!-- Astute Imaging -->
+                    <div id="astute" class="tab-content block">
+                        <h3 class="text-xl font-bold text-slate-white">Software Engineer Intern <a href="https://www.linkedin.com/company/astuteimaging/" target="_blank" class="text-teal-300 hover:text-teal-400 transition">@ Astute Imaging</a></h3>
+                        <p class="font-mono text-sm mb-4">Jul 2025 – Sep 2025</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Developed and optimized algorithms for 3D medical visualizations, boosting computational speed by <span class="text-teal-300">7 times</span>.</span>
+                            </li>
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Built medical simulators for surgical procedures and implemented automated measurements using machine learning techniques.</span>
+                            </li>
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Worked with Qt, C++, and Python to integrate visualization tools into the core product pipeline.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Eco Racing -->
+                    <div id="shell" class="tab-content hidden">
+                        <h3 class="text-xl font-bold text-slate-white">Algorithms Developer <a href="https://www.linkedin.com/company/cairo-university-eco-racing-team/" target="_blank" class="text-teal-300 hover:text-teal-400 transition">@ Cairo Uni. Eco Racing Team</a></h3>
+                        <p class="font-mono text-sm mb-4">Sep 2023 – May 2025</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Secured <span class="text-teal-300">3rd Place Globally</span> in the Shell Autonomous Driving Competition, competing against teams from Europe, Asia, and Africa.</span>
+                            </li>
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Architected core software for a fully autonomous vehicle using ROS and C++ on Ubuntu.</span>
+                            </li>
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Implemented hybrid A*, RRT, Reeds-Shepp, and Dubins curves for path planning. Achieved efficiency of 14.77 KM/kWh.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Rehab Lab -->
+                    <div id="rehab" class="tab-content hidden">
+                        <h3 class="text-xl font-bold text-slate-white">Biomechanics Training <a href="https://www.linkedin.com/company/systems-and-biomedical-engineering-department-cairo-university/" target="_blank" class="text-teal-300 hover:text-teal-400 transition">@ Rehabilitation Lab</a></h3>
+                        <p class="font-mono text-sm mb-4">Aug 2023 – Sep 2023</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Conducted biomechanics data collection using IMUs, EMG, and pressure insoles.</span>
+                            </li>
+                            <li class="flex items-start"><i class="fas fa-caret-right text-teal-300 mt-1 mr-3 flex-shrink-0"></i>
+                                <span>Analyzed physiological data using Matlab and Python to support master's level research.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 reveal">
+            <div class="flex items-center mb-12">
+                <span class="text-2xl md:text-3xl font-bold text-slate-white font-mono mr-4"><span class="text-teal-300">03.</span> Some Things I've Built</span>
+                <div class="h-px bg-navy-700 flex-grow max-w-xs"></div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-4 mb-10 justify-center md:justify-start">
+                <button class="filter-btn active px-4 py-1 rounded-full border border-teal-300 bg-teal-300/10 text-teal-300 text-sm font-mono transition hover:bg-teal-300 hover:text-navy-900" onclick="filterProjects('all', this)">All</button>
+                <button class="filter-btn px-4 py-1 rounded-full border border-navy-700 text-slate-light text-sm font-mono transition hover:border-teal-300 hover:text-teal-300" onclick="filterProjects('biomed', this)">Biomedical/AI</button>
+                <button class="filter-btn px-4 py-1 rounded-full border border-navy-700 text-slate-light text-sm font-mono transition hover:border-teal-300 hover:text-teal-300" onclick="filterProjects('web', this)">Web/Edu</button>
+                <button class="filter-btn px-4 py-1 rounded-full border border-navy-700 text-slate-light text-sm font-mono transition hover:border-teal-300 hover:text-teal-300" onclick="filterProjects('signal', this)">Signal Processing</button>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+                <!-- Project 1: Cardiac MRI -->
+                <div class="project-card group relative bg-navy-800 rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-lg border border-navy-700" data-category="biomed">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-teal-300 text-4xl"><i class="fas fa-heart-pulse"></i></div>
+                            <div class="flex gap-4 text-teal-300 font-mono text-sm items-center">
+                                <span>Ongoing</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-white mb-2 group-hover:text-teal-300 transition">AI Cardiac MRI Reconstruction</h3>
+                        <p class="text-slate-light mb-4 text-sm flex-grow">
+                            A deep learning platform to reconstruct undersampled CMR data, accelerating clinical scans by up to 10x. Includes a web-based viewer for comparing reconstruction algorithms (SENSE, GRAPPA vs DL).
+                        </p>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-slate-light/80 mt-auto">
+                            <li>Python</li>
+                            <li>PyTorch</li>
+                            <li>Web Viewer</li>
+                            <li>Grad Project</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 2: Handilingo -->
+                <div class="project-card group relative bg-navy-800 rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-lg border border-navy-700" data-category="web">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-teal-300 text-4xl"><i class="fas fa-hands-asl-interpreting"></i></div>
+                            <div class="flex gap-4 text-slate-light">
+                                <a href="https://github.com/alizayan684/HandiLingo" target="_blank" class="hover:text-teal-300"><i class="fab fa-github text-xl"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-white mb-2 group-hover:text-teal-300 transition">Handilingo: ASL & Braille</h3>
+                        <p class="text-slate-light mb-4 text-sm flex-grow">
+                            Educational platform for caretakers to learn ASL and Braille. Features 700+ questions, gamification, progress tracking, and personalized profiles.
+                        </p>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-slate-light/80 mt-auto">
+                            <li>React</li>
+                            <li>Flask</li>
+                            <li>PostgreSQL</li>
+                            <li>Gamification</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 3: Img Processing Toolkit -->
+                <div class="project-card group relative bg-navy-800 rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-lg border border-navy-700" data-category="signal">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-teal-300 text-4xl"><i class="fas fa-image"></i></div>
+                            <div class="flex gap-4 text-slate-light">
+                                <a href="https://github.com/Ziadmohammed200/Advanced-Image-Processing-Toolkit" target="_blank" class="hover:text-teal-300"><i class="fab fa-github text-xl"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-white mb-2 group-hover:text-teal-300 transition">Image Processing Toolkit</h3>
+                        <p class="text-slate-light mb-4 text-sm flex-grow">
+                            End-to-end desktop app for noise modeling, edge detection (Canny, Sobel), and histogram analysis. Implements hybrid images (low/high pass filters).
+                        </p>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-slate-light/80 mt-auto">
+                            <li>Python</li>
+                            <li>Qt Designer</li>
+                            <li>OpenCV</li>
+                            <li>NumPy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 4: Beyond A* -->
+                <div class="project-card group relative bg-navy-800 rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-lg border border-navy-700" data-category="biomed">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-teal-300 text-4xl"><i class="fas fa-route"></i></div>
+                            <div class="flex gap-4 text-slate-light">
+                                <a href="https://github.com/alizayan684/Matheletes_Research" target="_blank" class="hover:text-teal-300"><i class="fab fa-github text-xl"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-white mb-2 group-hover:text-teal-300 transition">Beyond A*: Path Planning</h3>
+                        <p class="text-slate-light mb-4 text-sm flex-grow">
+                            Comparative research of Voronoi Potential Fields vs. PDE Sandwich approach. Won 5th best research project at TCCD Forum.
+                        </p>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-slate-light/80 mt-auto">
+                            <li>Mathematica</li>
+                            <li>Pygame</li>
+                            <li>Algorithms</li>
+                            <li>Research</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 5: Signal Equalizer -->
+                <div class="project-card group relative bg-navy-800 rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-lg border border-navy-700" data-category="signal">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-teal-300 text-4xl"><i class="fas fa-sliders-h"></i></div>
+                            <div class="flex gap-4 text-slate-light">
+                                <a href="https://github.com/alizayan684/signal-equalizer" target="_blank" class="hover:text-teal-300"><i class="fab fa-github text-xl"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-white mb-2 group-hover:text-teal-300 transition">Signal Equalizer</h3>
+                        <p class="text-slate-light mb-4 text-sm flex-grow">
+                            Desktop tool for modifying frequency magnitudes. Isolates musical instruments or animal sounds from mixed signals using Wiener filters and FFT.
+                        </p>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-slate-light/80 mt-auto">
+                            <li>Python</li>
+                            <li>PyQt5</li>
+                            <li>DSP</li>
+                            <li>Scipy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Project 6: Multiverse Chess -->
+                <div class="project-card group relative bg-navy-800 rounded-xl overflow-hidden hover:-translate-y-2 transition duration-300 shadow-lg border border-navy-700" data-category="web">
+                    <div class="p-6 h-full flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-teal-300 text-4xl"><i class="fas fa-chess-knight"></i></div>
+                            <div class="flex gap-4 text-slate-light">
+                                <a href="https://github.com/alizayan684/MultiVerse-Of-Chess" target="_blank" class="hover:text-teal-300"><i class="fab fa-github text-xl"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-white mb-2 group-hover:text-teal-300 transition">Multiverse Chess</h3>
+                        <p class="text-slate-light mb-4 text-sm flex-grow">
+                            A feature-rich multiplayer chess game. Includes user registration, match history, save/resume functionality, and a polished main menu.
+                        </p>
+                        <ul class="flex flex-wrap gap-3 text-xs font-mono text-slate-light/80 mt-auto">
+                            <li>C++</li>
+                            <li>OOP</li>
+                            <li>Game Logic</li>
+                            <li>Database</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="https://github.com/alizayan684" target="_blank" class="px-8 py-4 border border-teal-300 text-teal-300 font-mono rounded hover:bg-teal-300/10 transition duration-300">
+                    View Full Archive on GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 text-center max-w-2xl mx-auto reveal">
+            <p class="text-teal-300 font-mono mb-4">04. What's Next?</p>
+            <h2 class="text-4xl md:text-5xl font-bold text-slate-white mb-6">Get In Touch</h2>
+            <p class="text-slate-light text-lg mb-12">
+                I'm currently looking for new opportunities in biomedical engineering and software development. 
+                Whether you have a question or just want to say hi, my inbox is always open.
+            </p>
+            
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="mailto:alizayan684@gmail.com" class="text-3xl text-slate-light hover:text-teal-300 hover:-translate-y-1 transition duration-300"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/ali-zayan-b98239264" target="_blank" class="text-3xl text-slate-light hover:text-teal-300 hover:-translate-y-1 transition duration-300"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/alizayan684" target="_blank" class="text-3xl text-slate-light hover:text-teal-300 hover:-translate-y-1 transition duration-300"><i class="fab fa-github"></i></a>
+            </div>
+
+            <a href="mailto:alizayan684@gmail.com" class="px-8 py-4 border border-teal-300 text-teal-300 font-mono rounded hover:bg-teal-300/10 transition duration-300">
+                Say Hello
+            </a>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="py-8 text-center text-slate-light/50 text-sm font-mono">
+            <p>Designed & Built by Ali Zayan</p>
+            <p class="mt-2">
+                <i class="fas fa-code-branch mr-1"></i> v3.0 &middot; 2025
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg', 'bg-navy-900/95');
+            } else {
+                nav.classList.remove('shadow-lg', 'bg-navy-900/95');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        // Experience Tabs
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.add("hidden");
+                tabcontent[i].classList.remove("block");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("text-teal-300", "border-teal-300", "bg-navy-800/50", "active");
+                tablinks[i].classList.add("text-slate-light", "border-transparent");
+            }
+            document.getElementById(tabName).classList.remove("hidden");
+            document.getElementById(tabName).classList.add("block");
+            evt.currentTarget.classList.add("text-teal-300", "border-teal-300", "bg-navy-800/50", "active");
+            evt.currentTarget.classList.remove("text-slate-light", "border-transparent");
+        }
+
+        // Project Filters
+        function filterProjects(category, btn) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Toggle button styles
+            buttons.forEach(b => {
+                b.classList.remove('active', 'bg-teal-300/10', 'text-teal-300', 'border-teal-300');
+                b.classList.add('border-navy-700', 'text-slate-light');
+            });
+            btn.classList.remove('border-navy-700', 'text-slate-light');
+            btn.classList.add('active', 'bg-teal-300/10', 'text-teal-300', 'border-teal-300');
+
+            // Filter logic
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    // Add tiny animation for re-appearance
+                    card.animate([
+                        { transform: 'scale(0.9)', opacity: 0 },
+                        { transform: 'scale(1)', opacity: 1 }
+                    ], {
+                        duration: 300,
+                        easing: 'ease-out'
+                    });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
